@@ -1,14 +1,8 @@
 import React, { useState } from "react";
-import {
-  HomeIcon,
-  HeartIcon,
-  UserIcon,
-  MagnifyingGlassIcon,
-  ClockIcon,
-  ChartBarIcon,
-  Bars3Icon,
-} from "@heroicons/react/24/outline";
+import { ChartBarIcon, Bars3Icon } from "@heroicons/react/24/outline";
+import { links } from "../data/dummy";
 import MoreOptions from "../layouts/MoreOptions";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   const [optionsOpen, setoptionsOpen] = useState(false);
@@ -21,49 +15,27 @@ const Sidebar = () => {
       className="fixed min-h-screen hidden  md:flex flex-col lg:w-64 md:w-20
      border shadow-xl justify-between "
     >
-      <div className="w-full flex gap-2 flex-col">
+      <div className="w-full flex gap-3 flex-col">
         <div className="flex flex-row lg:justify-start justify-center pl-2 my-3 gap-3 items-center">
           <ChartBarIcon className="text-sky-500 h-8 w-8" />
           <h4 className="hidden lg:block text-lg tracking-tight font-semibold">
             Notify
           </h4>
         </div>
-
-        <div className="w-full flex flex-col gap-6 mt-10">
-          <div className="relative w-full flex flex-row gap-2 hover:bg-gray-200 hover:ease-in-out rounded-sm items-center sm:justify-center lg:justify-start lg:pl-2 cursor-pointer p-2">
-            <HomeIcon className="icons" />
-            <span className="hidden lg:block text-lg font-sm font-semibold">
-              Home
-            </span>
-          </div>
-
-          <div className="w-full flex flex-row gap-2 hover:bg-gray-200 hover:ease-in-out rounded-sm items-center sm:justify-center lg:justify-start lg:pl-2 cursor-pointer p-2">
-            <HeartIcon className="icons" />
-            <span className="hidden lg:block text-lg font-sm font-semibold">
-              Notifications
-            </span>
-          </div>
-
-          <div className="w-full flex flex-row gap-2 hover:bg-gray-200 hover:ease-in-out rounded-sm items-center sm:justify-center lg:justify-start lg:pl-2 cursor-pointer p-2">
-            <MagnifyingGlassIcon className="icons" />
-            <span className="hidden lg:block text-lg font-sm font-semibold">
-              Search
-            </span>
-          </div>
-
-          <div className="w-full flex flex-row gap-2 hover:bg-gray-200 hover:ease-in-out rounded-sm items-center sm:justify-center lg:justify-start lg:pl-2 cursor-pointer p-2">
-            <UserIcon className="icons" />
-            <span className="hidden lg:block text-lg font-sm font-semibold">
-              Profile
-            </span>
-          </div>
-
-          <div className="w-full flex flex-row gap-2 hover:bg-gray-200 hover:ease-in-out rounded-sm items-center sm:justify-center lg:justify-start lg:pl-2 cursor-pointer p-2">
-            <ClockIcon className="icons" />
-            <span className="hidden lg:block text-lg font-sm font-semibold">
-              Explore
-            </span>
-          </div>
+        <div className="mt-5">
+          {links.map((link, index) => (
+            <NavLink
+              to={link.path}
+              className="w-full pl-2 bg-white hover:bg-gray-200 flex flex-row gap-2 p-2 rounded-sm
+             items-center cursor-pointer lg:justify-start md:justify-center mt-4"
+              key={index}
+            >
+              <span className="icons">{link.icon}</span>
+              <label className="hidden lg:block text-sm font-sm font-semibold cursor-pointer">
+                {link.label}
+              </label>
+            </NavLink>
+          ))}
         </div>
       </div>
 
@@ -74,7 +46,7 @@ const Sidebar = () => {
         }}
       >
         <Bars3Icon className="icons" />
-        <p className="md:hidden lg:block">More</p>
+        <span className="md:hidden lg:block ">More</span>
         {optionsOpen && <MoreOptions />}
       </div>
     </div>
