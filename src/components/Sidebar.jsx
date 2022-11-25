@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   HomeIcon,
   HeartIcon,
@@ -6,13 +6,20 @@ import {
   MagnifyingGlassIcon,
   ClockIcon,
   ChartBarIcon,
+  Bars3Icon,
 } from "@heroicons/react/24/outline";
+import MoreOptions from "../layouts/MoreOptions";
 
 const Sidebar = () => {
+  const [optionsOpen, setoptionsOpen] = useState(false);
+
+  const handleMoreOptionsMenu = () => {
+    setoptionsOpen(!optionsOpen);
+  };
   return (
     <div
       className="fixed min-h-screen hidden  md:flex flex-col lg:w-64 md:w-20
-     border shadow-xl justify-between items-center"
+     border shadow-xl justify-between "
     >
       <div className="w-full flex gap-2 flex-col">
         <div className="flex flex-row lg:justify-start justify-center pl-2 my-3 gap-3 items-center">
@@ -60,9 +67,15 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <div className="relative my-3">
-        <h2>Bottom </h2>
-        <p className="absolute -top-4">absolute</p>
+      <div
+        className="relative my-3 lg:justify-start flex flex-row items-center gap-3 w-full cursor-pointer lg:pl-2 md:justify-center"
+        onClick={() => {
+          handleMoreOptionsMenu();
+        }}
+      >
+        <Bars3Icon className="icons" />
+        <p className="md:hidden lg:block">More</p>
+        {optionsOpen && <MoreOptions />}
       </div>
     </div>
   );
