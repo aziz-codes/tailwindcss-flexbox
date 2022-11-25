@@ -5,12 +5,12 @@ import Sidebar from "./components/Sidebar";
 import { Home, Explore, Notifications, Profile, Search } from "./pages/index";
 const App = () => {
   return (
-    <div className="flex relative">
-      <div className="lg:w-64 md:w-20">
+    <div className="flex flex-row 2xl:justify-start overflow-x-hidden">
+      <div className="lg:w-64 md:w-20 relative">
         <Sidebar />
         <BottomNavigation />
       </div>
-      <div className="ml-3">
+      <div className="relative lg:left-[250px] md:left-20 flex">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/explore" element={<Explore />} />
@@ -19,6 +19,7 @@ const App = () => {
           <Route path="/search" element={<Search />} />
         </Routes>
       </div>
+      <div></div>
     </div>
   );
 };
